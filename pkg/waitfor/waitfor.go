@@ -17,7 +17,6 @@ package waitfor
 import (
 	"database/sql"
 	"fmt"
-	"log"
 	"net"
 	"sync"
 	"time"
@@ -78,7 +77,7 @@ func (h *Handler) Wait(options ...Options) error {
 	for name, check := range h.dependencies {
 		wg.Add(1)
 		go func(n string, c Check) {
-			log.Printf("Waiting for %s\n", n)
+			logrus.Infof("Waiting for %s\n", n)
 			if err := performCheck(n, c, *option); err != nil {
 				errorMessages <- err
 			} else {
