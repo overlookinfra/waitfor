@@ -99,6 +99,10 @@ func toError(messages chan error) (err error) {
 	for e := range messages {
 		errMsg += fmt.Sprintf("%s\n", e.Error())
 	}
+
+	if errMsg == "" {
+		return nil
+	}
 	return fmt.Errorf(errMsg)
 }
 
